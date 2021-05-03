@@ -3,15 +3,10 @@
 <head>
   <meta charset="utf-8">
   <title>Vue TEST</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
+  <script src="./todo.js" defer></script>
 </head>
 <body>
   <div id="app">{{ message }}</div>
-  <script>
-    var app1 = new Vue({
-          el: '#app',
-          data: { message: 'Hello world!' }
-    })
-  </script>
 </body>
 </html>
