@@ -3,7 +3,7 @@ const itemKey = 'vueTodo'
 var app = new Vue({
   el: '#app',
   data: {
-    newTodoText: '',
+    newTodoBody: '',
     todos: {}, // (Ex) { "j6fdcq68": { "body": "Buy milk", "editing": true } }
   },
   created: function() {
@@ -13,11 +13,11 @@ var app = new Vue({
   },
   methods: {
     create: function() {
-      if (!this.newTodoText) { return; }
+      if (!this.newTodoBody) { return; }
 
       let key = Math.random().toString(36).slice(-8)
-      this.upsertTodo(key, this.newTodoText)
-      this.newTodoText = ''
+      this.upsertTodo(key, this.newTodoBody)
+      this.newTodoBody = ''
     },
     edit: function(key) {
       this.todos[key].editing = true
