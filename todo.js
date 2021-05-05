@@ -16,7 +16,7 @@ var app = new Vue({
       if (!this.newTodoBody) { return; }
 
       let key = Math.random().toString(36).slice(-8)
-      this.upsertTodo(key, this.newTodoBody)
+      this.upsert(key, this.newTodoBody)
       this.newTodoBody = ''
     },
     edit: function(key) {
@@ -24,14 +24,14 @@ var app = new Vue({
     },
     update: function(e) {
       let el = e.target.elements
-      this.upsertTodo(el.key.value, el.body.value)
-    },
-    upsertTodo: function(key, body) {
-      this.$set(this.todos, key, { body: body, editing: false })
-      localStorage.setItem(itemKey, JSON.stringify(this.todos))
+      this.upsert(el.key.value, el.body.value)
     },
     destroy: function(key) {
       this.$delete(this.todos, key)
+      localStorage.setItem(itemKey, JSON.stringify(this.todos))
+    },
+    upsert: function(key, body) {
+      this.$set(this.todos, key, { body: body, editing: false })
       localStorage.setItem(itemKey, JSON.stringify(this.todos))
     }
   }
