@@ -1,6 +1,6 @@
 const itemKey = 'vueTodo'
 
-var app1 = new Vue({
+var app = new Vue({
   el: '#app',
   data: {
     newTodoText: '',
@@ -12,7 +12,7 @@ var app1 = new Vue({
     }
   },
   methods: {
-    addNewTodo: function() {
+    create: function() {
       if (!this.newTodoText) { return; }
 
       let key = Math.random().toString(36).slice(-8)
@@ -28,7 +28,7 @@ var app1 = new Vue({
     },
     upsertTodo: function(key, body) {
       this.$set(this.todos, key, { body: body, editing: false })
-      localStorage.setItem(itemKey, JSON.stringify(this.todos)) // TODO: 共通化
+      localStorage.setItem(itemKey, JSON.stringify(this.todos))
     }
   }
 })

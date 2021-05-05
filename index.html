@@ -9,24 +9,24 @@
 <body>
   <h1>Vue TODO App</h1>
   <div id="app">
-    <form v-on:submit.prevent="addNewTodo">
-      <label for="new-todo">TODO追加</label>
-      <input id="new-todo" v-model="newTodoText">
-      <button>追加</button>
-    </form>
     <ul>
       <li v-for="(todo, key) in todos" v-bind:key="key">
         <form v-if="todo['editing']" v-on:submit.prevent="update">
-          <input type="text" v-bind:value="todo['body']" name="body">
+          <input type="text" name="body" v-bind:value="todo['body']">
           <input type="hidden" name="key" v-bind:value="key">
           <button>保存</button>
         </form>
         <div v-else>
-          {{ key }} / {{ todo["body"] }} / {{ todo["editing"] }}
+          {{ todo["body"] }}
           <button v-on:click="edit(key)">編集</button>
         </div>
       </li>
     </ul>
+    <form v-on:submit.prevent="create">
+      <label for="new-todo" hidden>TODO追加</label>
+      <input id="new-todo" v-model="newTodoText">
+      <button>追加</button>
+    </form>
   </div>
 </body>
 </html>
