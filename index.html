@@ -15,8 +15,16 @@
       <button>追加</button>
     </form>
     <ul>
-      <li v-for="todo in todos" v-bind:key="todo.key">
-        {{ todo.key }} / {{ todo.body }}
+      <li v-for="(todo, key) in todos" v-bind:key="key">
+        <form v-if="todo['editing']" v-on:submit.prevent="update">
+          <input type="text" v-bind:value="todo['body']" name="body">
+          <input type="hidden" name="key" v-bind:value="key">
+          <button>保存</button>
+        </form>
+        <div v-else>
+          {{ key }} / {{ todo["body"] }} / {{ todo["editing"] }}
+          <button v-on:click="edit(key)">編集</button>
+        </div>
       </li>
     </ul>
   </div>

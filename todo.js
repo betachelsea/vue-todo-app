@@ -3,22 +3,31 @@ const itemKey = 'vueTodo'
 var app1 = new Vue({
   el: '#app',
   data: {
-    newTodoText: '',
-    todos: [], // (Ex) { key: 'j6fdcq68', body: 'todo body!' }
+    newTodoText: '', // これ要るか？
+    todos: {}, // (Ex) { "j6fdcq68": { "body": "Buy milk", "editing": true } }
   },
   created: function() {
-    this.todos = JSON.parse(localStorage.getItem(itemKey))
+    if (localStorage.getItem(itemKey) !== null) {
+      this.todos = JSON.parse(localStorage.getItem(itemKey))
+    }
   },
   methods: {
     addNewTodo: function() {
       if (!this.newTodoText) { return; }
 
-      this.todos.push({
-        key: Math.random().toString(36).slice(-8),
-        body: this.newTodoText,
-      })
+      let key = Math.random().toString(36).slice(-8)
+      this.todos[key] = { body: this.newTodoText, editing: false }
       this.newTodoText = ''
+
       localStorage.setItem(itemKey, JSON.stringify(this.todos))
+    },
+    edit: function(key) {
+      this.todos[key].editing = true
+    },
+    update: function(e) {
+      let el = e.target.elements
+      this.$set(this.todos, el.key.value, { body: el.body.value, editing: false })
+      localStorage.setItem(itemKey, JSON.stringify(this.todos)) // TODO: 共通化
     }
   }
 })
