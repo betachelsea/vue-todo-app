@@ -29,6 +29,10 @@ var app = new Vue({
     upsertTodo: function(key, body) {
       this.$set(this.todos, key, { body: body, editing: false })
       localStorage.setItem(itemKey, JSON.stringify(this.todos))
+    },
+    destroy: function(key) {
+      this.$delete(this.todos, key)
+      localStorage.setItem(itemKey, JSON.stringify(this.todos))
     }
   }
 })

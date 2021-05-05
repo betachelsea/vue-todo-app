@@ -19,6 +19,7 @@
         <div v-else>
           {{ todo["body"] }}
           <button v-on:click="edit(key)">編集</button>
+          <button v-on:click="destroy(key)">削除</button>
         </div>
       </li>
     </ul>
