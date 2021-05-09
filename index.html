@@ -17,11 +17,11 @@
           <input type="hidden" name="key" v-bind:value="key">
           <button>保存</button>
         </form>
-        <div v-else>
+        <template v-else>
           {{ todo["body"] }}
           <button v-on:click="edit(key)">編集</button>
           <button v-on:click="destroy(key)" class="destroyBtn">削除</button>
-        </div>
+        </template>
       </li>
     </ul>
     <form v-on:submit.prevent="create">
